@@ -1,4 +1,5 @@
 import re
+from math import log
 
 import numpy as np
 
@@ -45,8 +46,31 @@ print('================================================')
 print('')
 print('')
 print('')
-print('=====================Normalized========================')
+print('=====================df========================')
+print(terms)
+document_num = len(documents_list)
+df = [0] * len(terms)
+for document in tf:
+    for index, count in enumerate(document):
+        if count != 0:
+            df[index] += 1
 
-
-
+print(df)
+print('================================================')
+print('')
+print('')
+print('')
+print('=======================idf======================')
+idf = list(map(lambda x: log(document_num / x), df))
+print(np.around(idf, decimals=3))
+print('================================================')
+print('')
+print('')
+print('')
+print('=======================tf-idf======================')
+temp = list()
+temp.append(idf)
+temp *= document_num
+tf_idf = np.array(tf) * np.array(temp)
+print(np.around(tf_idf, decimals=3))
 print('================================================')
