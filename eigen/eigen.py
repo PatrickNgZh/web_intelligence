@@ -1,5 +1,11 @@
 import numpy as np
 
+print('====================================================')
+print('')
+print('For calculate the eigenvector centrality, Please use A.T')
+print('')
+print('====================================================')
+
 row, column = input().split(' ')
 
 row = int(row)
