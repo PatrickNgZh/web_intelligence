@@ -74,3 +74,48 @@ temp *= document_num
 tf_idf = np.array(normalized_tf) * np.array(temp)
 print(np.around(tf_idf, decimals=3))
 print('================================================')
+print('')
+print('')
+print('')
+print('=======================query======================')
+print(terms)
+query_list = list()
+with open('./query.dat', 'r') as f:
+    for line in f.readlines():
+        line = line.strip()
+        line = re.sub('[^A-Za-z\s]', ' ', line)
+        line = line.lower()
+        query_list.append(line.split())
+
+query_tf = list()
+for document in query_list:
+    temp = [0] * len(terms)
+    for term in document:
+        temp[terms.index(term)] += 1
+    query_tf.append(temp)
+print('tf')
+print(query_tf)
+
+print('')
+query_normalized_tf = list()
+for document in query_tf:
+    max_value = max(document)
+    document = list(map(lambda x: x / max_value, document))
+    query_normalized_tf.append(document)
+print('normalized_tf')
+for count in query_normalized_tf:
+    print(np.around(count, decimals=3))
+
+print('')
+print('df')
+print(df)
+
+print('')
+print('idf')
+print(np.around(idf, decimals=3))
+
+print('')
+print('tf-idf')
+query_tf_idf = np.array(query_normalized_tf) * np.array(idf)
+print(np.around(query_tf_idf, decimals=3))
+print('===================================================')
